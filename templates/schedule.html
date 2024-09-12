@@ -5,37 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agendar Serviço</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='notify.css') }}">
 </head>
 <body>
     <div class="container">
         <h1>Agendar Serviço</h1>
-        <form action="/schedule" method="post">
+        <form id="scheduleForm" action="/schedule" method="post">
             <label for="name">Nome e Sobrenome:</label>
             <input type="text" id="name" name="name" required>
 
             <label>Tipo de Serviço:</label>
             <div class="checkbox-group">
-                <label class="checkbox-container">
-                    Corte de Cabelo - R$30
-                    <input type="checkbox" name="service" value="Corte de Cabelo - R$30">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="checkbox-container">
-                    Manicure - R$20
-                    <input type="checkbox" name="service" value="Manicure - R$20">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="checkbox-container">
-                    Massagem - R$50
-                    <input type="checkbox" name="service" value="Massagem - R$50">
-                    <span class="checkmark"></span>
-                </label>
+                {% for service in services %}
+                    <label class="checkbox-container">
+                        {{ service.name }} - R${{ service.price }}
+                        <input type="checkbox" name="service" value="{{ service.name }} - R${{ service.price }}">
+                        <span class="checkmark"></span>
+                    </label>
+                {% endfor %}
             </div>
 
             <label for="date">Data:</label>
             <input type="date" id="date" name="date" required>
             <button type="submit">Agendar</button>
         </form>
+
+        <!-- notify -->
+        <div class="notification" id="notification">
+            <span id="notificationMessage"></span>
+            <span class="close-btn" onclick="closeNotification()">×</span>
+        </div>
     </div>
+
+    <script src="{{ url_for('static', filename='notify.js') }}"></script>
 </body>
 </html>

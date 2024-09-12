@@ -7,15 +7,20 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h1>Agendamentos</h1>
-        <a href="/schedule">Agendar Serviço</a>
-        <ul>
-            {% for appointment in appointments %}
-                <li>{{ appointment.name }} - {{ appointment.service }} - {{ appointment.date }}</li>
-            {% endfor %}
-        </ul>
-        <a href="/admin">Página do Administrador</a>
-    </div>
+    <h1>Agendamentos</h1>
+    <a href="/schedule">Agendar Serviço</a>
+    <ul>
+        {% for appointment in appointments %}
+            <li>
+                {{ appointment.name }} - 
+                Serviços: 
+                {% for service in appointment.services %}
+                    {{ service.name }} ({{ service.price }}){% if not loop.last %}, {% endif %}
+                {% endfor %}
+                - Data: {{ appointment.date }}
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="/admin">Página do Administrador</a>
 </body>
 </html>
