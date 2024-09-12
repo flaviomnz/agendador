@@ -4,15 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agendamentos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Agendamentos</h1>
-    <a href="/schedule">Agendar Serviço</a>
-    <ul>
-        {% for appointment in appointments %}
-            <li>{{ appointment.name }} - {{ appointment.service }} - {{ appointment.date }}</li>
-        {% endfor %}
-    </ul>
-    <a href="/admin">Página do Administrador</a>
+    <div class="container">
+        <h1>Agendamentos</h1>
+        <a href="/schedule">Agendar Serviço</a>
+        <ul>
+            {% for appointment in appointments %}
+                <li>{{ appointment.name }} - {{ appointment.service }} - {{ appointment.date }}</li>
+            {% endfor %}
+        </ul>
+        <a href="/admin">Página do Administrador</a>
+    </div>
 </body>
 </html>
